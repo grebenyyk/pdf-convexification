@@ -39,14 +39,18 @@ Let $X=(x_1,\dots,x_N)\in(\mathbb{R}^3)^N$ be an element-labeled structure,
 quotiented by rigid motions $E(3)$ (reflections **not** quotiented, so
 chirality remains as an irreducible $\mathbb{Z}_2$ residue). The forward map is
 
-$$F(X) = R_{Q_{\max},\sigma}\,\rho_X, \qquad \rho_X=\sum_{i<j} w_{ij}\,\delta_{\|x_i-x_j\|},$$
+$$
+F(X) = R_{Q_{\max},\sigma}\,\rho_X, \qquad \rho_X=\sum_{i<j} w_{ij}\,\delta_{\|x_i-x_j\|},
+$$
 
 where $R_{Q_{\max},\sigma}$ is the **resolution operator** (reciprocal-space
 window on $[0,Q_{\max}]$ giving $\Delta r\approx\pi/Q_{\max}$, plus thermal/
 instrumental broadening of width $\sigma$). Its **instrument information
 capacity**
 
-$$m_{\mathrm{eff}}(Q_{\max},\sigma)=\dim\operatorname{span}\{R\,\delta_t:t\in[0,R_{\max}]\}\approx\lceil R_{\max}/\Delta r\rceil$$
+$$
+m_{\mathrm{eff}}(Q_{\max},\sigma)=\dim\operatorname{span}\{R\,\delta_t:t\in[0,R_{\max}]\}\approx\lceil R_{\max}/\Delta r\rceil
+$$
 
 is finite, with $m_{\mathrm{eff}}\to\infty$ as $Q_{\max}\to\infty$ (exact-distance
 limit) and $m_{\mathrm{eff}}\to 0$ as $Q_{\max}\to 0$.
@@ -74,9 +78,11 @@ The crux is generic-global-rigidity theory transferred from *exact, unweighted,
 complete* distance data to *band-limited, scattering-weighted, soft* data on a
 *chemistry-constrained manifold*.
 
-See [`pdf_convexification_problem.tex`](pdf_convexification_problem.tex) /
-[`.pdf`](pdf_convexification_problem.pdf) for the full statement, known facts,
-and references.
+See [`pdf_convexification_problem_math.tex`](pdf_convexification_problem_math.tex) /
+[`.pdf`](pdf_convexification_problem_math.pdf) for the concise math-only
+**submission draft** (2 pp), and [`pdf_convexification_problem.tex`](pdf_convexification_problem.tex) /
+[`.pdf`](pdf_convexification_problem.pdf) for the full statement with known
+facts and references.
 
 ## References
 
@@ -97,11 +103,13 @@ and references.
 ## Repository contents
 
 ```
-pdf_convexification_problem.tex   # full LaTeX statement (compilable standalone)
-pdf_convexification_problem.pdf   # rendered output
+pdf_convexification_problem_math.tex   # concise math-only submission draft (2 pp)
+pdf_convexification_problem_math.pdf   # rendered output (concise)
+pdf_convexification_problem.tex        # full LaTeX statement (standalone, reference)
+pdf_convexification_problem.pdf        # rendered output (full)
 README.md
 .gitignore
-archive/                          # internal notes / earlier drafts (gitignored)
+archive/                               # internal notes / earlier drafts (gitignored)
 ```
 
 ## Build
