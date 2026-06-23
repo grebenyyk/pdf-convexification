@@ -37,6 +37,141 @@ and acceptable interpretations.
   model and reference measure on the prior manifold.
 - Partial solutions are absolutely welcome.
 
+### Detailed clarifications
+
+#### 1. What counts as “solving” the problem?
+
+A complete solution is not required. Valid contributions include:
+
+- **Rigorous proofs** for natural subclasses of priors (e.g. fixed bond lengths
+  and angles, free dihedrals, hard-sphere exclusion).
+- **Counterexamples** to the naive threshold $m_{\mathrm{eff}} \ge d_C$,
+  especially constructions with $m_{\mathrm{eff}} = d_C - 1$ that still admit
+  flip ambiguities or spurious local minima.
+- **Sharp characterizations** of local identifiability, global identifiability,
+  or landscape convexity as *separate* results.
+- **Computational certificates**: for a specified finite family of priors and a
+  discretized resolution operator, numerically determine the threshold at which
+  injectivity / convexity is lost, with reproducible code and data.
+
+#### 2. $m_{\mathrm{eff}}$ must be made explicit
+
+The symbol $m_{\mathrm{eff}}$ is intentionally left as an *effective
+information dimension*. A valid solution must choose and state one of the
+following interpretations (or an equivalent one):
+
+- **Singular-value cutoff:** the number of singular values of the discretized
+  operator $R$ above a specified noise floor.
+- **Nyquist count:** $m_{\mathrm{eff}} = \lceil R_{\max} / \Delta r\rceil$
+  with $\Delta r = \pi / Q_{\max}$, possibly reduced by broadening $\sigma$.
+- **Finite-sample rank:** the rank of the linear map from a discretized distance
+  grid to the observed PDF samples.
+
+You may assume $m_{\mathrm{eff}}$ is finite. The exact value may depend on the
+kernel and on $R_{\max}$; state your choice.
+
+#### 3. Treat P1, P2, P3 separately
+
+The equivalence
+
+> P1 (injectivity) $\Leftrightarrow$ P2 (full-rank Fisher)
+> $\Leftrightarrow$ P3 ($\varepsilon$-convexity)
+
+is a **conjecture**, not an assumed theorem.
+
+- **P2 is local.** It can often be attacked with differential geometry /
+  transversality arguments.
+- **P1 is global.** It is the hardest and may fail even when
+  $m_{\mathrm{eff}} \ge d_C$.
+- **P3 is about optimization landscape.** It requires specifying the Riemannian
+  metric on $C$ and the norm on $Y$.
+
+Do not assume the three properties are equivalent. Proving or disproving any
+one implication is already progress.
+
+#### 4. Genericity
+
+“For generic $X \in C$” means: the set of exceptions has measure zero with
+respect to a natural measure on the prior manifold $C$ (e.g. Lebesgue measure in
+internal-coordinate parameter space). You may restrict to smooth points of $C$.
+
+#### 5. The chirality / reflection ambiguity is irreducible
+
+Pair-distance data, whether exact or band-limited, cannot distinguish a chiral
+structure from its mirror image. Therefore:
+
+- Identifiability holds at best modulo a $\mathbb{Z}_2$ reflection.
+- A fiber of size 2 for chiral configurations is **not** a failure of the
+  problem.
+- Do not quotient reflections away implicitly; state clearly when your result is
+  “up to reflection.”
+
+#### 6. Permutation of identical atoms
+
+Atoms with the same scattering length $b_i$ can be permuted without changing
+$F(X)$. The problem is formally posed on structures modulo rigid motions, but
+for identically labeled atoms you may additionally quotient by permutations of
+those labels. A valid solution should state which symmetry group is being used.
+
+#### 7. What is a “chemistry-consistent prior”?
+
+At minimum, a prior $C$ is a closed subset of
+$\mathcal{X} = (\mathbb{R}^3)^N / E(3)$ that can be realized in internal coordinates with:
+
+- a bond graph,
+- fixed or interval-constrained bond lengths and bond angles,
+- a finite set of free dihedral angles whose cardinality defines $d_C$,
+- inequality constraints (steric lower bounds, coordination bounds, etc.).
+
+You may restrict to smooth manifolds $C$ (away from constraint boundaries). You
+do not need to model all of chemistry; a well-defined subclass is enough.
+
+#### 8. “Minimal prior” means maximal $d_C$
+
+For given resolution parameters $(Q_{\max}, \sigma)$, the “least informative”
+prior is the one with the largest number of free dihedrals $d_C$ for which the
+desired property (P1/P2/P3) still holds. Thus the trade-off curve
+$d_C^{\,*}(Q_{\max})$ is well-defined once a property and a family of priors are
+fixed.
+
+#### 9. The information-theoretic part (item c) is optional
+
+To address the deficit
+
+$$
+I_{\mathrm{deficit}} = h(X \mid C) - I\bigl(F(X); X \mid C\bigr),
+$$
+
+you must supply:
+
+- a probabilistic noise model,
+- a reference measure on $C$,
+- a definition of $h$ and $I$ compatible with the band-limited observation.
+
+If you do not wish to address this part, that is acceptable; partial solutions
+are welcome.
+
+#### 10. Norms and spaces
+
+Unless stated otherwise, assume:
+
+- $Y = L^2([0, R_{\max}])$ or a finite-dimensional sample space,
+- the loss is the least-squares residual
+  $\mathcal{L}_y(X) = \|F(X) - y\|_Y^2$.
+
+If you use a different norm or regularizer, state it explicitly.
+
+#### 11. Numerical / experimental contributions
+
+If you solve the problem computationally for a specific family:
+
+- Provide the code and the exact discretization of $R$.
+- Report how $m_{\mathrm{eff}}$ was estimated.
+- Show the failure cases (e.g. pairs of non-congruent structures with the same
+  PDF, or landscapes with spurious minima).
+- Use reproducible random seeds and make the structure files / PDF data
+  available.
+
 ## Files
 
 | file | description |
