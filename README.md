@@ -18,6 +18,8 @@ $m_{\mathrm{eff}} \ge d_C$ between the instrument's information capacity
 $m_{\mathrm{eff}}$ and the prior's free dimension (modulo the irreducible
 chirality / reflection ambiguity).
 
+The threshold $m_{\mathrm{eff}} \ge d_C$ should be understood as a conjectural information-capacity lower bound/phase transition, not as an assumed theorem. Part of the problem is to determine what additional genericity, sampling/noise, finite-rank, and prior-regularity assumptions are needed for local identifiability, global injectivity, or convexity; counterexamples to the naive threshold are also considered valid progress.
+
 ## Files
 
 | file | description |
