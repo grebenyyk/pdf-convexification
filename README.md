@@ -8,7 +8,7 @@ instance of the *unassigned distance geometry problem* — and is further
 band-limited by instrumental resolution. The residual non-uniqueness is what
 structural and chemical priors are asked to remove.
 
-## The question, in one line
+## The question
 
 Given a band-limited, scattering-weighted distance measurement $F(X)=R\,\rho_X$
 of a configuration $X$ and a structural prior $C$ of free dimension $d_C$,
@@ -18,16 +18,12 @@ $m_{\mathrm{eff}} \ge d_C$ between the instrument's information capacity
 $m_{\mathrm{eff}}$ and the prior's free dimension (modulo the irreducible
 chirality / reflection ambiguity).
 
-The full statement, known facts, and three sub-questions — (a) the threshold,
-(b) the minimal prior, (c) the information-theoretic form — are in the LaTeX
-sources below.
-
 ## Files
 
 | file | description |
 |---|---|
-| `pdf_convexification_problem_math.tex` / `.pdf` | concise math-only submission draft (2 pp) |
-| `pdf_convexification_problem.tex` / `.pdf` | full statement with known facts and references |
+| `pdf_convexification_problem_math.tex` / `.pdf` | concise math-only submission draft |
+| `pdf_convexification_problem.tex` / `.pdf` | full statement with chemical details |
 
 ## References
 
