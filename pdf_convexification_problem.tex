@@ -1,0 +1,231 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+
+\newtheorem{problem}{Problem}
+
+\title{Convexification of Atomic-Structure Solution \\
+from the Pair Distribution Function --- Minimal Chemical Prior and Resolution}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Motivation}
+
+Determining atomic coordinates from the pair distribution function (PDF) is the
+central inverse problem of total-scattering crystallography
+\cite{Billinge2004}. Mathematically, the PDF inversion is an instance of the
+\emph{unassigned} Distance Geometry Problem (uDGP) \cite{Billinge2018}: the
+data are a multiset (distribution) of interatomic distances without the
+assignment of each distance to a specific atom pair. Empirically it is \emph{non-convex}: practical solvers
+need good initial guesses, restraints, and multi-start global optimization.
+The non-convexity has two separable sources. The first consists of
+\emph{trivial} symmetries --- permutations of identical atoms, rigid motions,
+and chirality --- which one may quotient out by convention. The second is a
+\emph{residual geometric} non-uniqueness of the distance-to-coordinate map:
+several non-congruent structures can share the same pair-distance data, and
+band-limited instrumental resolution erases further information. Chemical
+knowledge (bond lengths, angles, coordination, steric exclusion) is known in
+practice to ``convexify'' the problem by pruning spurious minima. The
+question we pose is \emph{how much} chemical information, \emph{jointly with
+the instrument resolution}, suffices to make the residual problem
+identifiable and convex --- equivalently, what is the \emph{minimal} extra
+information about the structure that the PDF alone lacks?
+
+\section*{Setup}
+
+Let $X=(x_1,\dots,x_N)\in(\mathbb{R}^3)^N$ be a structure whose atoms carry
+element labels $e_i\in E$ (a finite set) with known scattering lengths
+$b_i>0$. We quotient by rigid motions and write
+\[
+  \mathcal{X} \;=\; (\mathbb{R}^3)^N / E(3),
+\]
+where $E(3)$ acts by translations and rotations only; reflections are
+\emph{not} quotiented, so enantiomers are distinct points of $\mathcal{X}$.
+The (scattering-weighted) \emph{pair-distance measure} of $X$ is
+\[
+  \rho_X \;=\; \sum_{i<j} w_{ij}\,\delta_{\|x_i-x_j\|},
+  \qquad w_{ij}=b_i b_j\ge 0,
+\]
+a finite positive measure on $\mathbb{R}_{\ge 0}$. The experimental PDF is a
+\emph{band-limited, broadened} linear measurement of $\rho_X$,
+\[
+  F(X) \;=\; R_{Q_{\max},\sigma}\,\rho_X \;\in\; Y,
+\]
+where $R_{Q_{\max},\sigma}: \mathcal{M}(\mathbb{R}_{\ge 0})\to Y$ is the known
+\emph{resolution operator}. Physically the reduced PDF is
+$G(r)=\tfrac{2}{\pi}\int_0^{Q_{\max}} Q\,[S(Q)-1]\sin(Qr)\,dQ$
+\cite{Billinge2004}; $R_{Q_{\max},\sigma}$ encodes (i) the reciprocal-space
+window supported on $[0,Q_{\max}]$, whose truncation produces termination
+ripples and sets the real-space resolution $\Delta r\approx\pi/Q_{\max}$, and
+(ii) convolution in $r$ with a kernel of width $\sigma\approx\sigma_{\mathrm{res}}(Q_{\max})$
+modelling instrumental and thermal broadening. The essential property is that
+$R_{Q_{\max},\sigma}$ is a \emph{compact smoothing operator with non-trivial
+kernel}: features of $\rho_X$ below the scale $\Delta r$ are invisible. Let
+\[
+  m_{\mathrm{eff}}(Q_{\max},\sigma)
+  \;=\; \dim \operatorname{span}\bigl\{\, R_{Q_{\max},\sigma}\delta_t
+  \;:\; t\in[0,R_{\max}] \,\bigr\}
+  \;\approx\; \bigl\lceil R_{\max}/\Delta r \bigr\rceil
+\]
+be the \emph{instrument information capacity}: the number of linearly
+independent band-limited scalar constraints the measurement can deliver over
+the relevant distance range $[0,R_{\max}]$ (reduced by the broadening
+$\sigma$). It is finite, monotone in $Q_{\max}$, with
+$m_{\mathrm{eff}}\to\infty$ as $Q_{\max}\to\infty$ (the exact-distance limit,
+where every distinct distance is separately resolvable) and
+$m_{\mathrm{eff}}\to 0$ as $Q_{\max}\to 0$. For any structure,
+$\operatorname{rank}(DF_X)\le \min(d_C,\,m_{\mathrm{eff}})$, so the data can
+constrain at most $m_{\mathrm{eff}}$ independent degrees of freedom of the
+prior.
+
+\paragraph{Chemical prior (hybrid formalization).}
+A \emph{chemistry-consistent prior} is a closed subset $C\subset\mathcal{X}$
+that is required to be realizable as an \emph{internal-coordinate constraint
+set}: a bond graph $G_b=(V,E_b)$ with fixed bond lengths and fixed bond
+angles, a specified set of free dihedral angles (so that the relaxed geometry
+is a smooth manifold $M_C$ of dimension $d_C=\#\{\text{free dihedrals}\}$),
+together with inequality constraints encoding steric exclusion (hard-sphere
+lower bounds $r_{\min}(e_i,e_j)>0$ on non-bonded distances), element-specific
+coordination, and hybridization. We require $C$ to satisfy the
+\emph{chemistry-consistency axioms}: positive steric radii; element-specific
+admissible bond-length and bond-angle intervals; and coordination bounds.
+Concrete priors (a $Z$-matrix, a fixed topology, hard-sphere exclusion) are
+instances; $C$ is otherwise treated abstractly.
+
+\section*{Known facts}
+
+\begin{enumerate}
+\item \textbf{Unassigned distance geometry.}
+The PDF inversion belongs to the unassigned Distance Geometry Problem (uDGP)
+framework \cite{Billinge2018}, which formalizes reconstruction from a list of
+distances \emph{without} the assignment of distances to vertex pairs; the same
+work treats distance-interval uncertainty and vector geometry problems (VGPs)
+arising in PDF methods for nanostructures. Our problem extends uDGP to
+\emph{band-limited, scattering-weighted} distance distributions on a
+chemistry-constrained manifold.
+
+\item \textbf{Exact-distance, infinite-resolution limit ($R=\mathrm{id}$).}
+Injectivity of $\rho$ (equivalently of the Euclidean distance matrix) up to
+rigid motion is the classical distance-geometry / global-rigidity question.
+In dimension $3$, generic global rigidity requires redundant rigidity and
+stressability and is subtler than edge-counting; symmetric or special
+structures (crystals, icosahedra) are generically \emph{not} globally rigid,
+so discrete ``flip'' ambiguities persist even with perfect data.
+
+\item \textbf{One-dimensional distance-distribution case.}
+For points on a line or a loop with unassigned \emph{noisy} pairwise
+distances (the turnpike / beltway problems), the distance distribution is a
+collection of quadratic functionals of an $N$-hot density, and projected
+gradient descent with a spectral initializer converges \emph{locally
+linearly} to the global optimizer under explicit conditions
+\cite{HuangDokmanic2021}. This is the one-dimensional realization of
+``convexification of the distance-distribution inversion'' --- but only in
+$1$D and without a chemical prior.
+
+\item \textbf{Sparsity-driven recoverability.}
+For integer sets, uniqueness of turnpike reconstruction is open, yet
+\emph{sparsity} of the integer set yields polynomial-time recovery up to
+shift and reversal with high probability when the sparsity is
+$O(n^{1/2-\varepsilon})$ \cite{JaganathanHassibi2012}. This is an instance of
+``extra structural information (here sparsity) makes recovery possible'' ---
+the discrete analogue of the chemical prior in our problem.
+
+\item \textbf{Irreducible residue.}
+Chirality cannot be resolved by any pair-distance data: enantiomers have
+identical $\rho_X$ and hence identical $F(X)$ for every $R$. Identifiability
+therefore holds at best modulo the $\mathbb{Z}_2$ reflection; the fiber
+cardinality satisfies $K\ge 2$ for chiral structures. This is an information
+bound, not a measurement-precision issue.
+\end{enumerate}
+
+\section*{Open problem}
+
+For data $y=F(X_\star)$ and the least-squares loss
+$\mathcal{L}_y(X)=\|F(X)-y\|_Y^2$ restricted to $C$, consider:
+\begin{itemize}
+\item[\textbf{(P1)}] \emph{Identifiability.} $F|_C$ is injective modulo
+chirality: every fiber has cardinality $1$ (or $2$, the enantiomer pair).
+\item[\textbf{(P2)}] \emph{Local identifiability.} The Fisher information
+operator $I_X=(DF_X)^{*}(DF_X)$ on $T_X C$ has full rank for all $X\in C$
+(no flat directions; weighted by the scattering weights $w_{ij}$).
+\item[\textbf{(P3)}] \emph{$\varepsilon$-convexity.} $\mathcal{L}_y|_C$ is
+geodesically $\varepsilon$-convex on the connected component of $C$
+containing $X_\star$ and has a unique stationary point there (no spurious
+local minima; distinct basins separated by barriers of height $>\varepsilon$).
+\end{itemize}
+
+\begin{problem}
+Characterize the chemistry-consistent priors $C$, as a function of the
+resolution $(Q_{\max},\sigma)$ --- equivalently of $m_{\mathrm{eff}}$ ---
+for which the three properties above are equivalent and hold for generic
+$X_\star\in C$, and determine the \emph{minimal} such prior.
+\end{problem}
+
+Concretely:
+\begin{enumerate}
+\item[\textbf{(a)}] \emph{Threshold.} Prove or disprove that there is a sharp
+threshold at $m_{\mathrm{eff}}=d_C$: $\varepsilon$-convexification (and the
+equivalence $\text{(P1)}\!\Leftrightarrow\!\text{(P2)}\!\Leftrightarrow\!\text{(P3)}$)
+holds for generic $C$ \emph{iff} $m_{\mathrm{eff}}(Q_{\max},\sigma)\ge d_C$,
+subject to the chirality lower bound. Construct counterexamples at
+$m_{\mathrm{eff}}=d_C-1$ in which flips or spurious local minima persist.
+\item[\textbf{(b)}] \emph{Minimal prior.} For given $(Q_{\max},\sigma)$, find
+the maximal admissible $d_C$ --- the \emph{least} chemical knowledge (most
+free dihedrals, fewest fixed bonds/angles/coordination constraints) --- for
+which the threshold is met, and describe the trade-off curve
+$d_C^{\,*}(Q_{\max})$. (Low resolution forces small $d_C^{\,*}$, i.e.\ more
+chemistry; as $Q_{\max}\to\infty$, $d_C^{\,*}\uparrow$ and the rigidity limit
+is recovered.)
+\item[\textbf{(c)}] \emph{Information-theoretic form.} Show that the
+threshold $m_{\mathrm{eff}}\ge d_C$ coincides with the vanishing of the
+information deficit
+\[
+  I_{\mathrm{deficit}}
+  \;=\; h(X\mid C) \;-\; I\!\bigl(F(X);\,X\mid C\bigr),
+\]
+up to the irreducible chirality term $\log 2$, where $h$ is the differential
+entropy of the prior manifold and $I$ the mutual information of the
+band-limited measurement.
+\end{enumerate}
+
+The crux is that this is generic-global-rigidity theory transferred from
+\emph{exact, unweighted, complete} distance data to \emph{band-limited,
+scattering-weighted, soft} data on a \emph{chemistry-constrained manifold}:
+the regime left open at the intersection of
+\cite{HuangDokmanic2021,JaganathanHassibi2012,Billinge2018}.
+
+\begin{thebibliography}{99}
+
+\bibitem{HuangDokmanic2021}
+S.~Huang, I.~Dokmani\'c,
+\emph{Reconstructing Point Sets from Distance Distributions},
+IEEE Trans.\ Signal Process.\ \textbf{69} (2021), 1811--1827.
+arXiv:1804.02465.
+
+\bibitem{JaganathanHassibi2012}
+K.~Jaganathan, B.~Hassibi,
+\emph{Reconstruction of Integers from Pairwise Distances},
+arXiv:1212.2386 (2012).
+
+\bibitem{Billinge2018}
+S.~J.~L.~Billinge, P.~M.~Duxbury, D.~S.~Gon\c{c}alves, C.~Lavor,
+A.~Mucherino,
+\emph{Recent results on assigned and unassigned distance geometry with
+applications to protein molecules and nanostructures},
+Ann.\ Oper.\ Res.\ \textbf{271}(1) (2018), 161--203.
+DOI:10.1007/s10479-018-2989-6.
+
+\bibitem{Billinge2004}
+S.~J.~L.~Billinge, M.~G.~Kanatzidis,
+\emph{Beyond crystallography: the study of disorder, nanocrystallinity and
+crystallographically challenged materials with pair distribution functions},
+Chem.\ Commun.\ (2004), 749--760.
+DOI:10.1039/b311073n.
+
+\end{thebibliography}
+\end{document}

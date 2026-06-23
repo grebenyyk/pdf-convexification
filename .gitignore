@@ -1,0 +1,25 @@
+# Internal notes / working drafts (not part of the problem statement)
+archive/
+
+# macOS
+.DS_Store
+
+# LaTeX build artifacts (source .tex and rendered .pdf are tracked)
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.dvi
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.idx
+*.ilg
+*.ind
+*.nav
+*.snm
+*.vrb
