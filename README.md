@@ -25,9 +25,9 @@ The threshold $m_{\mathrm{eff}} \ge d_C$ should be understood as a conjectural i
 The submitted problem statement is frozen; this repository records clarifications
 and acceptable interpretations.
 
-- The threshold \(m_{\mathrm{eff}} \ge d_C\) is conjectural. A counterexample
+- The threshold $m_{\mathrm{eff}} \ge d_C$ is conjectural. A counterexample
   to this naive threshold is a valid contribution.
-- \(m_{\mathrm{eff}}\) should be interpreted as an effective information
+- $m_{\mathrm{eff}}$ should be interpreted as an effective information
   dimension, requiring a finite sampling model, noise floor, resolution
   threshold, or singular-value cutoff.
 - Identifiability, local identifiability, and convexity should be treated as
