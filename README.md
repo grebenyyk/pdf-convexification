@@ -20,6 +20,23 @@ chirality / reflection ambiguity).
 
 The threshold $m_{\mathrm{eff}} \ge d_C$ should be understood as a conjectural information-capacity lower bound/phase transition, not as an assumed theorem. Part of the problem is to determine what additional genericity, sampling/noise, finite-rank, and prior-regularity assumptions are needed for local identifiability, global injectivity, or convexity; counterexamples to the naive threshold are also considered valid progress.
 
+## Clarifications for solvers
+
+The submitted problem statement is frozen; this repository records clarifications
+and acceptable interpretations.
+
+- The threshold \(m_{\mathrm{eff}} \ge d_C\) is conjectural. A counterexample
+  to this naive threshold is a valid contribution.
+- \(m_{\mathrm{eff}}\) should be interpreted as an effective information
+  dimension, requiring a finite sampling model, noise floor, resolution
+  threshold, or singular-value cutoff.
+- Identifiability, local identifiability, and convexity should be treated as
+  distinct targets. Proving implications between them, or showing that an
+  implication fails, is part of the problem.
+- The information-theoretic formulation requires an explicit probabilistic/noise
+  model and reference measure on the prior manifold.
+- Partial solutions are absolutely welcome.
+
 ## Files
 
 | file | description |
