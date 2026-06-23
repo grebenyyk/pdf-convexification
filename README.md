@@ -8,8 +8,6 @@ instance of the *unassigned distance geometry problem* — and is further
 band-limited by instrumental resolution. The residual non-uniqueness is what
 structural and chemical priors are asked to remove.
 
-Drafted for submission to the [CUHK-Shenzhen AI Math Open Problems](https://rybindmitry.github.io/problems/index.html) bank.
-
 ## The question, in one line
 
 Given a band-limited, scattering-weighted distance measurement $F(X)=R\,\rho_X$
@@ -30,18 +28,6 @@ sources below.
 |---|---|
 | `pdf_convexification_problem_math.tex` / `.pdf` | concise math-only submission draft (2 pp) |
 | `pdf_convexification_problem.tex` / `.pdf` | full statement with known facts and references |
-| `archive/` | internal notes / earlier drafts (gitignored) |
-
-## Build
-
-```bash
-pdflatex pdf_convexification_problem_math.tex   # run twice for citation numbers
-# or: latexmk -pdf pdf_convexification_problem_math.tex
-```
-
-Both `.tex` files are self-contained. For the problem-bank form, paste the
-fragment from `\title{...}` through `\end{thebibliography}` (drop the preamble
-and `\begin{document}` / `\end{document}`).
 
 ## References
 
@@ -58,9 +44,10 @@ and `\begin{document}` / `\end{document}`).
 4. S. J. L. Billinge, M. G. Kanatzidis, *Beyond crystallography: the study of
    disorder, nanocrystallinity and crystallographically challenged materials
    with pair distribution functions*, Chem. Commun. (2004), 749–760.
-   [doi:10.1039/b311073n](https://doi.org/10.1039/b311073n).
+   [doi:10.1039/B309577K](https://doi.org/10.1039/B309577K).
+   
 
 ## Links
 
-- Submission target: [CUHK-SZ AI Math Open Problems — Submit a problem](https://rybindmitry.github.io/problems/submit.html)
+- Submission: [CUHK-SZ AI Math Open Problems — Problem 17](https://rybindmitry.github.io/problems/17.html)
 - License: problem text under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
